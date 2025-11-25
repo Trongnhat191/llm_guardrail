@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  generator:
+    build:
+      context: ./llm_guardrail/modeling/generator
+    ports:
+      - "8000:8000"
+    volumes:
+      - hf-cache:/opt/hf_cache
+    restart: unless-stopped
+
+  guardrail:
+    build:
+      context: ./llm_guardrail/modeling/guardrail
+    ports:
+      - "8001:8001"
+    volumes:
+      - hf-cache:/opt/hf_cache
+    restart: unless-stopped
+
+volumes:
+  hf-cache:
+
